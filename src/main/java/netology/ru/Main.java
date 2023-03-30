@@ -15,8 +15,10 @@ public class Main {
 
         List<Thread> threads = new ArrayList<>();
 
+
+
         for (String text : texts) {
-            Thread thread = new Thread(() -> {
+            Runnable logic = () -> {
                 int maxSize = 0;
                 for (int i = 0; i < text.length(); i++) {
                     for (int j = 0; j < text.length(); j++) {
@@ -36,7 +38,8 @@ public class Main {
                     }
                 }
                 System.out.println(text.substring(0, 100) + " -> " + maxSize);
-            });
+            };
+            Thread thread = new Thread(logic);
             threads.add(thread);
             thread.start();
         }
